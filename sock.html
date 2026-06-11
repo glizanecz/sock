@@ -26,18 +26,37 @@
         border-radius: 10px;
         border-style: solid;
         font-family: 'Trebuchet MS';
+        margin-bottom: 10px;
       }
 
       h1:hover {
         background-color: rgb(171, 171, 171);
       }
+
+      button {
+        display: flex;
+        align-content: center;
+      }
+
+      .interestsDiv {
+        display: flex;
+        align-content: center; 
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-color: black;
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+      }
     </style>
     <main>
         <h1>Welcome to Sock Social!</h1>
         <br>
-        <h2>What are your interests?</h2>
-        <h3>Select all that apply!</h3>
-        <div>
+        <div class="interestsDiv">
+          <h2>What are your interests?</h2>
+          <h3>Select all that apply!</h3>
           <button>I am an artist!</button>
           <br>
           <button>I am a programmer!</button>
