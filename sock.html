@@ -53,6 +53,33 @@
         -ms-user-select: none;
       }
       
+      .feedBtn {
+        width: fit-content;
+        height: fit-content;
+        overflow: auto;
+        padding: 10px;
+        border-color: rgb(198, 126, 17);
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+        background-color: #eead70;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+      
+      .feedBtns {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        gap: 6px;
+        justify-content: center;
+      }
+      
+      .feedBtn:hover {
+          background-color: orange;
+      }
+      
       button:hover {
           background-color: orange;
       }
@@ -75,7 +102,7 @@
       }
       
       .login {
-        display: grid; /*change to grid */
+        display: none; /*change to grid */
         place-items: center;
         width: fit-content;
         height: fit-content;
@@ -110,6 +137,28 @@
         border-style: solid; 
         font-family: 'Trebuchet MS';
         background-color: #eead70;  
+      }
+      
+      .feed {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row;
+          gap: 15px;
+          background-color: #eead70;
+          width: fit-content;
+          height: fit-content;
+          padding: 30px;
+          border-radius: 10px;
+          border: black solid;
+      }
+      
+      img {
+          border: black solid;
+          border-radius: 10px;
+          height: 500px;
+          width: 500px;
+          object-fit: cover;
       }
     </style>
     <main>
@@ -154,11 +203,50 @@
                 <input id="passwordInputSignUp" maxlength="15" type="password">
                 <br>
                 <br>
-                <button type="button" onclick="loginSubmit()">Sign Up</button>
+                <button type="button" onclick="signUpSubmit()">Sign Up</button>
             </form>
+        </div>
+        <div class="feed">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
+            <div class="feedBtns">
+                <button class="feedBtn">❤️</button>
+                <button class="feedBtn">⭐</button>
+                <button class="feedBtn">🔄</button>
+                <button class="feedBtn">📤</button>       
+            </div>
         </div>
     </main>
     <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        import { 
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDiMkSXx7nHxzqvAKIZEkaIo8_nX4YaV-o",
+          authDomain: "social-32f89.firebaseapp.com",
+          projectId: "social-32f89",
+          storageBucket: "social-32f89.firebasestorage.app",
+          messagingSenderId: "210185293804",
+          appId: "1:210185293804:web:9f24f6b208b135b15efac9",
+          measurementId: "G-S788GNK49F"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app)
+        
         //interests below
         const interestsDiv = document.getElementById("interestsDiv");
         const artistBtn = document.getElementById("artistBtn");
@@ -172,12 +260,12 @@
         let nothingBtnTog = 0;
         //login stuff below
         const loginBox = document.getElementById("loginBox");
-        const loginUser = document.getElementById("userInputLogin");
-        const loginPassword = document.getElementById("passwordInputLogin")
+        const loginUser = document.getElementById("userInputLogin").value;
+        const loginPassword = document.getElementById("passwordInputLogin").value;
         //sign up stuff below
         const signUpBox = document.getElementById("signUpBox");
-        const signUpUser = document.getElementById("userInputSignUp");
-        const signUpPassword = document.getElementById("passwordInputSignUp");
+        const signUpUser = document.getElementById("userInputSignUp").value;
+        const signUpPassword = document.getElementById("passwordInputSignUp").value;
         window.signUpInstead = function() {
             loginBox.style.display = "none";
             signUpBox.style.display = "grid";
@@ -197,6 +285,14 @@
             loginBox.style.display = "none";
             signUpBox.style.display = "none";
             interestsDiv.style.display = "grid";
+            signInWithEmailAndPassword(auth, loginUser, loginPassword);
+        }
+        
+        window.signUpSubmit = function() {
+            loginBox.style.display = "none";
+            signUpBox.style.display = "none";
+            interestsDiv.style.display = "grid";
+            createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
         }
         
         function creatingFeed() {
