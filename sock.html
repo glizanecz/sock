@@ -140,7 +140,7 @@
       }
       
       .feed {
-          display: flex;
+          display: none; /* change to flex in future code */
           align-items: center;
           justify-content: center;
           flex-direction: row;
@@ -206,8 +206,8 @@
                 <button type="button" onclick="signUpSubmit()">Sign Up</button>
             </form>
         </div>
-        <div class="feed">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
+        <div id="feedDiv" class="feed">
+            <img id="postShared" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
             <div class="feedBtns">
                 <button class="feedBtn">❤️</button>
                 <button class="feedBtn">⭐</button>
@@ -266,6 +266,12 @@
         const signUpBox = document.getElementById("signUpBox");
         const signUpUser = document.getElementById("userInputSignUp").value;
         const signUpPassword = document.getElementById("passwordInputSignUp").value;
+
+        //feed stuff below
+        const feed = document.getElementById("feedDiv");
+        let postShown = document.getElementById("postShared");
+
+
         window.signUpInstead = function() {
             loginBox.style.display = "none";
             signUpBox.style.display = "grid";
@@ -279,6 +285,7 @@
         window.createFeed = function() {
             creatingFeed()
             interestsDiv.style.display = "none";
+            feed.style.display = "flex";
         }
         
         window.loginSubmit = function() {
