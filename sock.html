@@ -10,12 +10,15 @@
   </head>
   <body>
     <style>
+    
       body {
+          display: grid;
+          place-items: center;
+      }
+      
+      h1 {
         display: grid;
         place-items: center;
-      }
-
-      h1 {
         overflow: auto;
         width: fit-content;
         height: fit-content;
@@ -26,39 +29,232 @@
         border-style: solid;
         font-family: 'Trebuchet MS';
         margin-bottom: 10px;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
       }
 
       h1:hover {
         background-color: rgb(155, 90, 34);
       }
-
-      .interestsDiv {
+      
+      button {
         width: fit-content;
         height: fit-content;
+        overflow: auto;
         padding: 10px;
-        margin-bottom: 10px;
         border-color: rgb(198, 126, 17);
         border-radius: 10px;
         border-style: solid; 
         font-family: 'Trebuchet MS';
         background-color: #eead70;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+      
+      button:hover {
+          background-color: orange;
+      }
+
+      .interestsDiv {
+        display: none; /*change to grid */
+        place-items: center;
+        width: fit-content;
+        height: fit-content;
+        overflow: auto;
+        padding: 10px;
+        border-color: rgb(198, 126, 17);
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+        background-color: #eead70;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+      
+      .login {
+        display: grid; /*change to grid */
+        place-items: center;
+        width: fit-content;
+        height: fit-content;
+        overflow: auto;
+        padding: 10px;
+        border-color: rgb(198, 126, 17);
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+        background-color: #eead70;  
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+      
+      sup {
+          cursor: pointer;
+          user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+      }
+      
+      .signUp {
+        display: none; /*change to grid */
+        place-items: center;
+        width: fit-content;
+        height: fit-content;
+        overflow: auto;
+        padding: 10px;
+        border-color: rgb(198, 126, 17);
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+        background-color: #eead70;  
       }
     </style>
     <main>
-        <h1>Welcome to *insert dumb name here*</h1>
-        <br>
-        <div class="interestsDiv">
+        <div id="interestsDiv" class="interestsDiv">
+          <h1>Welcome to *insert dumb name here*</h1>
+          <br>
           <h2>What are your interests?</h2>
-          <h3>Select all that apply!</h3>
-          <button>I am an artist!</button>
+          <h3><em><strong>Select all that apply!</strong></em></h3>
+          <button id="artistBtn">I am an artist!</button>
           <br>
-          <button>I am a programmer!</button>
+          <button id="programBtn">I am a programmer!</button>
           <br>
-          <button>I am nothing.</button>
+          <button id="nothingBtn">I am nothing.</button>
+          <br>
+          <br>
+          <button onclick="createFeed()">Create Feed</button>
         </div>
-        <br>
-        <button>Create Feed</button>
+        <div id="loginBox" class="login">
+            <h1>Login</h1><sup onclick="signUpInstead()">Or Sign Up!</sup>
+            <form>
+                <label for="loginInput">Username</label>
+                <br>
+                <input id="userInputLogin" maxlength="10" type="text">
+                <br>
+                <label for="passwordInput">Password</label>
+                <br>
+                <input id="passwordInputLogin" maxlength="15" type="password">
+                <br>
+                <br>
+                <button type="button" onclick="loginSubmit()">Login</button>
+            </form>
+        </div>
+        <div class="signUp" id="signUpBox">
+            <h1>Sign Up</h1><sup onclick="loginInstead()">Or Login!</sup>
+            <form>
+                <label for="userInputSignUp">Username</label>
+                <br>
+                <input id="userInputSignUp" maxlength="10" type="text">
+                <br>
+                <label for="passwordInputSignUp">Password</label>
+                <br>
+                <input id="passwordInputSignUp" maxlength="15" type="password">
+                <br>
+                <br>
+                <button type="button" onclick="loginSubmit()">Sign Up</button>
+            </form>
+        </div>
     </main>
-    <script src="index.js"></script>
+    <script type="module">
+        //interests below
+        const interestsDiv = document.getElementById("interestsDiv");
+        const artistBtn = document.getElementById("artistBtn");
+        const programBtn = document.getElementById("programBtn");
+        const nothingBtn = document.getElementById("nothingBtn");
+        let artist = "0";
+        let program = "0";
+        let nothing = "0";
+        let artistBtnTog = 0;
+        let programBtnTog = 0;
+        let nothingBtnTog = 0;
+        //login stuff below
+        const loginBox = document.getElementById("loginBox");
+        const loginUser = document.getElementById("userInputLogin");
+        const loginPassword = document.getElementById("passwordInputLogin")
+        //sign up stuff below
+        const signUpBox = document.getElementById("signUpBox");
+        const signUpUser = document.getElementById("userInputSignUp");
+        const signUpPassword = document.getElementById("passwordInputSignUp");
+        window.signUpInstead = function() {
+            loginBox.style.display = "none";
+            signUpBox.style.display = "grid";
+        }
+        
+        window.loginInstead = function() {
+            signUpBox.style.display = "none";
+            loginBox.style.display = "grid";
+        }
+        
+        window.createFeed = function() {
+            creatingFeed()
+            interestsDiv.style.display = "none";
+        }
+        
+        window.loginSubmit = function() {
+            loginBox.style.display = "none";
+            signUpBox.style.display = "none";
+            interestsDiv.style.display = "grid";
+        }
+        
+        function creatingFeed() {
+            if (artist == 0 & program == 0 && nothing == 0) {
+                nothing = 1;
+                console.log(artist + program + nothing)
+            }
+            console.log("feed created")
+        }
+        
+        artistBtn.onclick = function() {
+            nothing = "0";
+            nothingBtnTog = 0;
+            if (artistBtnTog === 1) {
+                artistBtnTog = 0
+                artist = "0";
+                artistBtn.style.backgroundColor = "#eead70"
+            } else {
+                artistBtnTog = 1;
+                artist = "1";
+                artistBtn.style.backgroundColor = "orange";
+            }
+            nothingBtn.style.backgroundColor = "#eead70"
+            console.log(artist + program + nothing)
+        }
+        programBtn.onclick = function() {
+            nothing = "0";
+            nothingBtnTog = 0;
+            if (programBtnTog === 1) {
+                programBtnTog = 0
+                program = "0";
+                programBtn.style.backgroundColor = "#eead70"
+            } else {
+                programBtnTog = 1;
+                program = "1";
+                programBtn.style.backgroundColor = "orange";
+            }
+            nothingBtn.style.backgroundColor = "#eead70"
+            console.log(artist + program + nothing)
+        }
+        nothingBtn.onclick = function() {
+            if (nothingBtnTog === 1) {
+                nothingBtnTog = 0;
+                nothing = "0";
+                nothingBtn.style.backgroundColor = "#eead70"
+            } else {
+                nothingBtnTog = 1;
+                nothing = "1";
+                nothingBtn.style.backgroundColor = "orange";
+            }
+            artist = "0";
+            artistBtnTog = 0;
+            artistBtn.style.backgroundColor = "#eead70"
+            program = "0";
+            programBtnTog = 0;
+            programBtn.style.backgroundColor = "#eead70"
+            console.log(artist + program + nothing)
+        }
+    </script>
   </body>
 </html>
