@@ -287,7 +287,11 @@
             interestsDiv.style.display = "grid";
             const loginUser = document.getElementById("userInputLogin").value;
             const loginPassword = document.getElementById("passwordInputLogin").value;
-            signInWithEmailAndPassword(auth, loginUser, loginPassword);
+            try {
+                signInWithEmailAndPassword(auth, loginUser, loginPassword);
+            } catch (error) {
+                console.log("User does not exist.")
+            }
         }
         
         window.signUpSubmit = function() {
@@ -296,7 +300,11 @@
             interestsDiv.style.display = "grid";
             const signUpUser = document.getElementById("userInputSignUp").value;
             const signUpPassword = document.getElementById("passwordInputSignUp").value;
-            createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
+            try {
+                createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
+            } catch (error) {
+                console.log("Email Acc Invalid, or User Not Signed Up")
+            }
         }
         
         function creatingFeed() {
