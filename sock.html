@@ -180,7 +180,7 @@
             <form>
                 <label for="loginInput">Username</label>
                 <br>
-                <input id="userInputLogin" maxlength="10" type="text">
+                <input id="userInputLogin" type="text">
                 <br>
                 <label for="passwordInput">Password</label>
                 <br>
@@ -195,7 +195,7 @@
             <form>
                 <label for="userInputSignUp">Username</label>
                 <br>
-                <input id="userInputSignUp" maxlength="10" type="text">
+                <input id="userInputSignUp" type="text">
                 <br>
                 <label for="passwordInputSignUp">Password</label>
                 <br>
@@ -257,12 +257,8 @@
         let nothingBtnTog = 0;
         //login stuff below
         const loginBox = document.getElementById("loginBox");
-        const loginUser = document.getElementById("userInputLogin").value;
-        const loginPassword = document.getElementById("passwordInputLogin").value;
         //sign up stuff below
         const signUpBox = document.getElementById("signUpBox");
-        const signUpUser = document.getElementById("userInputSignUp").value;
-        const signUpPassword = document.getElementById("passwordInputSignUp").value;
 
         //feed stuff below
         const feed = document.getElementById("feedDiv");
@@ -289,6 +285,8 @@
             loginBox.style.display = "none";
             signUpBox.style.display = "none";
             interestsDiv.style.display = "grid";
+            const loginUser = document.getElementById("userInputLogin").value;
+            const loginPassword = document.getElementById("passwordInputLogin").value;
             signInWithEmailAndPassword(auth, loginUser, loginPassword);
         }
         
@@ -296,6 +294,8 @@
             loginBox.style.display = "none";
             signUpBox.style.display = "none";
             interestsDiv.style.display = "grid";
+            const signUpUser = document.getElementById("userInputSignUp").value;
+            const signUpPassword = document.getElementById("passwordInputSignUp").value;
             createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
         }
         
