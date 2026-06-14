@@ -282,26 +282,26 @@
         }
         
         window.loginSubmit = function() {
-            loginBox.style.display = "none";
-            signUpBox.style.display = "none";
-            interestsDiv.style.display = "grid";
             const loginUser = document.getElementById("userInputLogin").value;
             const loginPassword = document.getElementById("passwordInputLogin").value;
             try {
                 signInWithEmailAndPassword(auth, loginUser, loginPassword);
+                loginBox.style.display = "none";
+                signUpBox.style.display = "none";
+                interestsDiv.style.display = "grid";
             } catch (error) {
                 console.log("User does not exist.")
             }
         }
         
         window.signUpSubmit = function() {
-            loginBox.style.display = "none";
-            signUpBox.style.display = "none";
-            interestsDiv.style.display = "grid";
             const signUpUser = document.getElementById("userInputSignUp").value;
             const signUpPassword = document.getElementById("passwordInputSignUp").value;
             try {
                 createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
+                loginBox.style.display = "none";
+                signUpBox.style.display = "none";
+                interestsDiv.style.display = "grid";
             } catch (error) {
                 console.log("Email Acc Invalid, or User Not Signed Up")
             }
