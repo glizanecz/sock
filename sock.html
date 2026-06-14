@@ -249,7 +249,7 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app)
-        
+        window.currentUserId = null;
         //interests below
         const interestsDiv = document.getElementById("interestsDiv");
         const artistBtn = document.getElementById("artistBtn");
@@ -292,6 +292,8 @@
             const loginPassword = document.getElementById("passwordInputLogin").value;
             try {
                 await signInWithEmailAndPassword(auth, loginUser, loginPassword);
+                const userCredential = await signInWithEmailAndPassword(auth, loginUser, loginPassword);
+                currentUserId = userCredential.user.uid;
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 feed.style.display = "flex";;
@@ -305,6 +307,8 @@
             const signUpPassword = document.getElementById("passwordInputSignUp").value;
             try {
                 await createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
+                const userCredential = await signInWithEmailAndPassword(auth, loginUser, loginPassword);
+                currentUserId = userCredential.user.uid;
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 interestsDiv.style.display = "grid";
