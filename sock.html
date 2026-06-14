@@ -281,11 +281,11 @@
             feed.style.display = "flex";
         }
         
-        window.loginSubmit = function() {
+        window.loginSubmit = async function() {
             const loginUser = document.getElementById("userInputLogin").value;
             const loginPassword = document.getElementById("passwordInputLogin").value;
             try {
-                signInWithEmailAndPassword(auth, loginUser, loginPassword);
+                await signInWithEmailAndPassword(auth, loginUser, loginPassword);
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 interestsDiv.style.display = "grid";
@@ -294,11 +294,11 @@
             }
         }
         
-        window.signUpSubmit = function() {
+        window.signUpSubmit = async function() {
             const signUpUser = document.getElementById("userInputSignUp").value;
             const signUpPassword = document.getElementById("passwordInputSignUp").value;
             try {
-                createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
+                await createUserWithEmailAndPassword(auth, signUpUser, signUpPassword);
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 interestsDiv.style.display = "grid";
