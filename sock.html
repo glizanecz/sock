@@ -326,6 +326,14 @@
             } catch (error) {
                 console.log("User does not exist.")
             }
+
+            try {
+                await createUserDataIfNeeded();
+                console.log("feed created")
+            } catch (error) {
+                console.log("Firestore error with creating data. Feed could not be created.")
+                console.error("Firestore Error: ", error.code, error.message);
+            }
         }
         
         window.signUpSubmit = async function() {
