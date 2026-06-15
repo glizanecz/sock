@@ -164,6 +164,30 @@
         width: 12px;
         height: 12px;
       }
+
+      .feedBarBtn {
+        width: fit-content;
+        height: fit-content;
+        overflow: auto;
+        padding: 10px;
+        border-color: rgb(198, 126, 17);
+        border-radius: 10px;
+        border-style: solid; 
+        font-family: 'Trebuchet MS';
+        background-color: #eead70;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;  
+      }
+
+      .feedBarBtn:hover {
+        background-color: orange;
+      }
+
+      .feedBar {
+        display: none; /* grid */
+        place-items: center;
+      }
     </style>
     <main>
         <div id="interestsDiv" class="interestsDiv">
@@ -226,6 +250,9 @@
             <input id="imageUpload" type="file" accept="image/*">
             <img id="showImage" style="width: fit-content; height: fit-content;">
         </div>
+        <div id="feedBar" class="feedBar">
+            <button id="createVideo" class="feedBarBtn">➕</button>
+        </div>
     </main>
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -287,6 +314,7 @@
         const artistBtn = document.getElementById("artistBtn");
         const programBtn = document.getElementById("programBtn");
         const nothingBtn = document.getElementById("nothingBtn");
+        const feedBar = document.getElementById("feedBar");
         let artist = "0";
         let program = "0";
         let nothing = "0";
@@ -334,6 +362,7 @@
             creatingFeed()
             interestsDiv.style.display = "none";
             feed.style.display = "flex";
+            feedBar.style.display = "grid";
         }
         
         window.loginSubmit = async function() {
@@ -346,6 +375,7 @@
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 feed.style.display = "flex";;
+                feedBar.style.display = "grid";
             } catch (error) {
                 console.log("User does not exist.")
             }
