@@ -354,6 +354,7 @@
                 console.log("feed created")
             } catch (error) {
                 console.log("Firestore error with creating data. Feed could not be created.")
+                console.error("Firestore Error: ", error.code, error.message);
             }
         }
         
