@@ -220,6 +220,11 @@
                 <button class="feedBtn">📤</button>       
             </div>
         </div>
+        <div id="post">
+            <input id="imageUpload" type="file" accept="image/*">
+            <img id="imagePreview" style="display:none; max-width:300px;">
+            <img id="postShown">
+        </div>
     </main>
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -295,6 +300,31 @@
         //feed stuff below
         const feed = document.getElementById("feedDiv");
         let postShown = document.getElementById("postShared");
+
+        const imageUpload = document.getElementById("imageUpload");
+        const imagePreview = document.getElementById("imagePreview");
+
+        let uploadedImageBase64 = "";
+
+        imageUpload.onchange = function() {
+            const file = imageUpload.files[0];
+
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                uploadedImageBase64 = event.target.result;
+
+                imagePreview.src = uploadedImageBase64;
+                imagePreview.style.display = "block";
+
+                console.log(uploadedImageBase64);
+            };
+
+            reader.readAsDataURL(file);
+            postShown.src = event.target.result;
+        };
 
 
         window.signUpInstead = function() {
