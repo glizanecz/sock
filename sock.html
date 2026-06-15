@@ -188,6 +188,30 @@
         display: none; /* grid */
         place-items: center;
       }
+
+      .userAcc {       
+          display: none; /* change to grid */
+          place-items: center;   
+          background-color: #eead70;
+          width: fit-content;
+          height: fit-content;
+          padding: 30px;
+          border-radius: 10px;
+          border: black solid;  
+          overflow: auto;
+      }
+
+      .pfpOnAcc {
+        display: grid;
+        place-items: center;
+        width: 20vw;
+        height: 20vh;
+      }
+
+      .usernameOnAcc {
+        display: grid;
+        place-items: center;
+      }
     </style>
     <main>
         <div id="interestsDiv" class="interestsDiv">
@@ -252,6 +276,10 @@
         </div>
         <div id="feedBar" class="feedBar">
             <button id="createVideo" class="feedBarBtn">➕</button>
+        </div>
+        <div id="userAcc" class="userAcc">
+            <img class="pfpOnAcc" src="pfp.png">
+            <h2 class="usernameOnAcc" id="usernameOnAcc">@usernameHere</h1>
         </div>
     </main>
     <script type="module">
@@ -330,6 +358,10 @@
         const feed = document.getElementById("feedDiv");
         const imageUpload = document.getElementById("imageUpload");
         const showImage = document.getElementById("showImage")
+        //User's Profile
+        const userAcc = document.getElementById("userAcc");
+        const usernameOnAcc = document.getElementById("usernameOnAcc");
+        //userAcc.style.display = "grid";
 
         let imageForSaving = "";
 
