@@ -222,8 +222,7 @@
         </div>
         <div id="post">
             <input id="imageUpload" type="file" accept="image/*">
-            <img id="imagePreview" style="display:none; max-width:300px;">
-            <img id="postShown">
+            <img id="showImage">
         </div>
     </main>
     <script type="module">
@@ -299,31 +298,11 @@
 
         //feed stuff below
         const feed = document.getElementById("feedDiv");
-        let postShown = document.getElementById("postShared");
-
         const imageUpload = document.getElementById("imageUpload");
-        const imagePreview = document.getElementById("imagePreview");
-
-        let uploadedImageBase64 = "";
+        const showImage = document.getElementById("showImage")
 
         imageUpload.onchange = function() {
-            const file = imageUpload.files[0];
-
-            if (!file) return;
-
-            const reader = new FileReader();
-
-            reader.onload = function(event) {
-                uploadedImageBase64 = event.target.result;
-
-                imagePreview.src = uploadedImageBase64;
-                imagePreview.style.display = "block";
-
-                console.log(uploadedImageBase64);
-            };
-
-            reader.readAsDataURL(file);
-            postShown.src = event.target.result;
+            showImage.src = URL.createObjectURL(imageUpload.files[0]);
         };
 
 
