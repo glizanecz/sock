@@ -323,7 +323,6 @@
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 feed.style.display = "flex";;
-                await createUserDataIfNeeded();
             } catch (error) {
                 console.log("User does not exist.")
             }
@@ -339,18 +338,23 @@
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
                 interestsDiv.style.display = "grid";
-                await createUserDataIfNeeded();
             } catch (error) {
                 console.log("Email Acc Invalid, or User Not Signed Up")
             }
         }
         
-        function creatingFeed() {
+        async function creatingFeed() {
             if (artist == 0 && program == 0 && nothing == 0) {
                 nothing = 1;
                 console.log(artist + program + nothing)
             }
-            console.log("feed created")
+
+            try {
+                await createUserDataIfNeeded();
+                console.log("feed created")
+            } catch (error) {
+                console.log("Firestore error with creating data. Feed could not be created.")
+            }
         }
         
         artistBtn.onclick = function() {
