@@ -309,9 +309,15 @@
         </div>
         <div id="post" class="postMenu">
             <h2 class="itemsOnPostMenu">Post Image</h2>
+            <br>
             <input class="itemsOnPostMenu" id="imageUpload" type="file" accept="image/*">
+            <br>
             <img class="itemsOnPostMenu" id="showImage" style="width: fit-content; height: fit-content;">
+            <br>
             <textarea class="itemsOnPostMenu" placeholder="Enter post text here..." id="textForPostInp"></textarea>
+            <br>
+            <br>
+            <button class="itemsOnPostMenu">Post!</button>
         </div>
         <div id="feedBar" class="feedBar">
             <button id="createVideo" onclick="createPost()" class="feedBarBtn">➕</button>
@@ -411,14 +417,34 @@
             const file = imageUpload.files[0];
             if (!file) return;
 
-            const reader = new FileReader();
+            const tempImg = new Image();
+            const tempUrl = URL.createObjectURL(file);
 
-            reader.onload = function(event) {
-                imageForSaving = event.target.result;
-                showImage.src = imageForSaving;
+            tempImg.onload = function() {
+                const width = tempImg.naturalWidth;
+                const height = tempImg.naturalHeight;
+
+                URL.revokeObjectURL(tempUrl);
+
+                if (width > 500 || height > 500) {
+                    alert("Image is too big. Max size is 500x500 pixels.");
+                    imageUpload.value = "";
+                    showImage.src = "";
+                    imageForSaving = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    imageForSaving = event.target.result;
+                    showImage.src = imageForSaving;
+                };
+
+                reader.readAsDataURL(file);
             };
 
-            reader.readAsDataURL(file);
+            tempImg.src = tempUrl;
         };
 
 
