@@ -262,7 +262,7 @@
             <img id="postShared" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
             <div class="feedBtns">
                 <button class="feedBtn">↑</button>
-                <button class="feedBtn"><img class="smallIMG" src="pfp.png"></button>
+                <button class="feedBtn" onclick="accBtnClick()"><img class="smallIMG" src="pfp.png"></button>
                 <button class="feedBtn">❤️</button>
                 <button class="feedBtn">⭐</button>
                 <button class="feedBtn">🔄</button>
@@ -395,6 +395,11 @@
             interestsDiv.style.display = "none";
             feed.style.display = "flex";
             feedBar.style.display = "grid";
+        }
+
+        window.accBtnClick = function() {
+            feed.style.display = "none";
+            userAcc.style.display = "grid";
         }
         
         window.loginSubmit = async function() {
