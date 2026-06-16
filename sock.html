@@ -468,8 +468,8 @@
         window.accBtnClick = function() {
             feed.style.display = "none";
             feedBar.style.display = "none"
-            userAcc.style.display = "grid";
             feedBar.style.display = "grid";
+            userAcc.style.display = "grid";
         }
 
         window.createPost = function() {
@@ -480,6 +480,7 @@
         }
         
         window.postImage = function() {
+            postMenu.style.display = "none";
             feed.style.display = "flex";
             feedBar.style.display = "grid";
         }
