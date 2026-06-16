@@ -297,6 +297,13 @@
         </div>
         <div id="feedDiv" class="feed">
             <img id="postShared" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
+            <h3>
+                <h4 id="usernameOnPost">@username01</h4>
+                <br>
+                <h4>--</h4>
+                <br>
+                <h4 id="currentPostText">Haha! Funny Eagle!</h4>
+            </h3>
             <div class="feedBtns">
                 <button class="feedBtn">↑</button>
                 <button class="feedBtn" onclick="accBtnClick()"><img class="smallIMG" src="pfp.png"></button>
@@ -307,7 +314,6 @@
                 <button class="feedBtn">⬇</button>    
             </div>
             <br>
-            <h3 id="currentPostText">Haha! Funny Eagle!</h3>
         </div>
         <div id="post" class="postMenu">
             <h2 class="itemsOnPostMenu">Post Image</h2>
@@ -393,6 +399,7 @@
         const nothingBtn = document.getElementById("nothingBtn");
         const feedBar = document.getElementById("feedBar");
         const postMenu = document.getElementById("post");
+        //i had ai make random adjectives and nouns
         const randomAdjective = [
             "Swift", "Silent", "Electric", "Cosmic", "Golden", "Crimson", "Frosty", "Lunar", "Solar", "Mystic",
             "Neon", "Pixel", "Turbo", "Lucky", "Clever", "Brave", "Chill", "Wild", "Bright", "Shadow",
@@ -418,6 +425,26 @@
         let artistBtnTog = 0;
         let programBtnTog = 0;
         let nothingBtnTog = 0;
+
+        async function getThirtyPosts(startnum, endnum) {
+            let arrayFetching = [];
+            for (let i = startnum; i <= endnum; i++) {
+                arrayFetching.push("post" + String(i))
+            }
+            const myQuery = query(
+                collection(db, "posts"),
+                where(documentId(), "in", arrayFetching)
+            )
+            const rawData = await getDocs(myQuery);
+            const posts = rawData.docs.map((doc) => {
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            });
+            return posts;
+        }
+
         const textAreaOnPost = document.getElementById("textForPostInp");
         //login stuff below
         const loginBox = document.getElementById("loginBox");
@@ -427,6 +454,7 @@
         //feed stuff below
         const feed = document.getElementById("feedDiv");
         const currentPostText = document.getElementById("currentPostText");
+        const usernameOnPost = document.getElementById("usernameOnPost");
         const imageUpload = document.getElementById("imageUpload");
         const showImage = document.getElementById("showImage")
         //User's Profile
@@ -434,8 +462,8 @@
         const usernameOnAcc = document.getElementById("usernameOnAcc");
         //userAcc.style.display = "grid";
 
+        // ai is used for image function thingy
         let imageForSaving = "";
-
         imageUpload.onchange = function() {
             const file = imageUpload.files[0];
             if (!file) return;
@@ -591,6 +619,13 @@
             } catch (error) {
                 console.log("Firestore error with creating data. Feed could not be created.")
                 console.error("Firestore Error: ", error.code, error.message);
+                return;
+            }
+
+            try {
+
+            } catch (error) {
+
             }
         }
         
