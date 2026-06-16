@@ -314,7 +314,7 @@
             <br>
             <img class="itemsOnPostMenu" id="showImage" style="width: fit-content; height: fit-content;">
             <br>
-            <textarea class="itemsOnPostMenu" placeholder="Enter post text here..." id="textForPostInp"></textarea>
+            <textarea maxlength="200" class="itemsOnPostMenu" placeholder="Enter post text here..." id="textForPostInp"></textarea>
             <br>
             <br>
             <button onclick="postImage()" class="itemsOnPostMenu">Post!</button>
@@ -427,7 +427,7 @@
                 URL.revokeObjectURL(tempUrl);
 
                 if (width > 1000 || height > 1000) {
-                    alert("Image is too big. Max size is 500x500 pixels.");
+                    alert("Image is too big. Max size is 1000x1000 pixels.");
                     imageUpload.value = "";
                     showImage.src = "";
                     imageForSaving = "";
