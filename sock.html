@@ -391,7 +391,6 @@
         const nothingBtn = document.getElementById("nothingBtn");
         const feedBar = document.getElementById("feedBar");
         const postMenu = document.getElementById("post");
-        let username = randomAdjective[Math.floor(Math.random() * randomAdjective.length)] + randomNoun[Math.floor(Math.random() * randomNoun)] + Math.floor(Math.random() * 10000);
         const randomAdjective = [
             "Swift", "Silent", "Electric", "Cosmic", "Golden", "Crimson", "Frosty", "Lunar", "Solar", "Mystic",
             "Neon", "Pixel", "Turbo", "Lucky", "Clever", "Brave", "Chill", "Wild", "Bright", "Shadow",
@@ -410,6 +409,7 @@
             "Programmer", "Painter", "Drummer", "Singer", "Dancer", "Chef", "Baker", "Fisher", "Diver", "Astronaut",
             "Comet", "Meteor", "Planet", "Galaxy", "Star", "Cloud", "Storm", "Flame", "Spark", "Echo"
         ]
+        let username = randomAdjective[Math.floor(Math.random() * randomAdjective.length)] + randomNoun[Math.floor(Math.random() * randomNoun)] + Math.floor(Math.random() * 10000);
         let artist = "0";
         let program = "0";
         let nothing = "0";
