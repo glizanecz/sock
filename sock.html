@@ -391,12 +391,32 @@
         const nothingBtn = document.getElementById("nothingBtn");
         const feedBar = document.getElementById("feedBar");
         const postMenu = document.getElementById("post");
+        let username = randomAdjective[Math.floor(Math.random() * randomAdjective.length)] + randomNoun[Math.floor(Math.random() * randomNoun)] + Math.floor(Math.random() * 10000);
+        const randomAdjective = [
+            "Swift", "Silent", "Electric", "Cosmic", "Golden", "Crimson", "Frosty", "Lunar", "Solar", "Mystic",
+            "Neon", "Pixel", "Turbo", "Lucky", "Clever", "Brave", "Chill", "Wild", "Bright", "Shadow",
+            "Glowing", "Stormy", "Rapid", "Tiny", "Massive", "Hidden", "Radiant", "Epic", "Cyber", "Atomic",
+            "Ancient", "Royal", "Sneaky", "Velvet", "Crystal", "Silver", "Bronze", "Emerald", "Sapphire", "Ruby",
+            "Midnight", "Sunny", "Cloudy", "Dreamy", "Friendly", "Curious", "Witty", "Gentle", "Bold", "Sharp",
+            "Smooth", "Dizzy", "Bouncy", "Fluffy", "Spicy", "Cozy", "Snappy", "Zesty", "Icy", "Fiery",
+            "Thunder", "Magnetic", "Infinite", "Digital", "Phantom", "Loyal", "Noble", "Quirky", "Jolly", "Vivid"
+        ]
+        const randomNoun = [
+            "Coder", "Artist", "Gamer", "Builder", "Explorer", "Wizard", "Ninja", "Pilot", "Captain", "Detective",
+            "Inventor", "Engineer", "Scientist", "Runner", "Skater", "Surfer", "Hunter", "Rider", "Miner", "Farmer",
+            "Creator", "Streamer", "Knight", "Warrior", "Guardian", "Dragon", "Phoenix", "Falcon", "Tiger", "Panther",
+            "Wolf", "Robot", "Android", "Viking", "Nomad", "Traveler", "Cowboy", "Gladiator", "Champion", "Boxer",
+            "Archer", "Ranger", "Mage", "Bard", "Scribe", "Scholar", "Dreamer", "Thinker", "Maker", "Designer",
+            "Programmer", "Painter", "Drummer", "Singer", "Dancer", "Chef", "Baker", "Fisher", "Diver", "Astronaut",
+            "Comet", "Meteor", "Planet", "Galaxy", "Star", "Cloud", "Storm", "Flame", "Spark", "Echo"
+        ]
         let artist = "0";
         let program = "0";
         let nothing = "0";
         let artistBtnTog = 0;
         let programBtnTog = 0;
         let nothingBtnTog = 0;
+        const textAreaOnPost = document.getElementById("textForPostInp");
         //login stuff below
         const loginBox = document.getElementById("loginBox");
         //sign up stuff below
@@ -479,10 +499,40 @@
             postMenu.style.display = "grid";
         }
         
-        window.postImage = function() {
+        window.postImage = async function() {
+            await postImageFunc()
             postMenu.style.display = "none";
             feed.style.display = "flex";
             feedBar.style.display = "grid";
+        }
+
+        async function postImageFunc() {
+            try {
+                const rawData = await getDoc(db, "posts", "recentPostNum")
+                const data = rawData.data;
+                let postNum = data.number + 1;
+                let postID = "post" + String(postNum);
+                let saveRefForPost = doc(db, "posts", postID)
+                let postIDLink = Math.random().toString(36).substring(2, 8);
+                await setDoc(saveRefForPost, {
+                    author: username,
+                    image: imageForSaving,
+                    likes: 0,
+                    saves: 0,
+                    postID: postIDLink,
+                    text: textAreaOnPost.value,
+                });
+                await updateDoc(db, "posts", "recentPostNum", {
+                    number: increment(1)
+                })
+                await updateDoc(saveRef, {
+                    postIds: arrayUnion(postID)
+                })
+                showImage.src = "";
+                textAreaOnPost.value = "";
+            } catch (error) {
+                console.log("Firebase failed, try posting later...")
+            }
         }
 
         window.loginSubmit = async function() {
