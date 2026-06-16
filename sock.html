@@ -508,8 +508,9 @@
 
         async function postImageFunc() {
             try {
+                const recentPostNumRef = doc(db, "posts", "recentPostNum")
                 const rawData = await getDoc(db, "posts", "recentPostNum")
-                const data = rawData.data;
+                const data = rawData.data();
                 let postNum = data.number + 1;
                 let postID = "post" + String(postNum);
                 let saveRefForPost = doc(db, "posts", postID)
@@ -522,7 +523,7 @@
                     postID: postIDLink,
                     text: textAreaOnPost.value,
                 });
-                await updateDoc(db, "posts", "recentPostNum", {
+                await updateDoc(recentPostNumRef, {
                     number: increment(1)
                 })
                 await updateDoc(saveRef, {
@@ -532,6 +533,7 @@
                 textAreaOnPost.value = "";
             } catch (error) {
                 console.log("Firebase failed, try posting later...")
+                console.error("Post error:", error.code, error.message);
             }
         }
 
