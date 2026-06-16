@@ -204,8 +204,8 @@
       .pfpOnAcc {
         display: grid;
         place-items: center;
-        width: 20vw;
-        height: 20vh;
+        width: 5vw;
+        height: 5vh;
       }
 
       .usernameOnAcc {
@@ -399,7 +399,9 @@
 
         window.accBtnClick = function() {
             feed.style.display = "none";
+            feedBar.style.display = "none"
             userAcc.style.display = "grid";
+            feedBar.style.display = "grid";
         }
         
         window.loginSubmit = async function() {
