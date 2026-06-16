@@ -226,6 +226,29 @@
         border-color: black;
         border-width: 2px;
       }
+
+      .itemsOnPostMenu {
+        place-items: center;   
+        background-color: #eead70;
+        width: fit-content;
+        height: fit-content;
+        padding: 30px;
+        border-radius: 10px;
+        border: black solid;  
+        overflow: auto;  
+      }
+
+      .postMenu {
+        display: none; /* change to grid */
+        place-items: center;   
+        background-color: #eead70;
+        width: fit-content;
+        height: fit-content;
+        padding: 30px;
+        border-radius: 10px;
+        border: black solid;  
+        overflow: auto;
+      }
     </style>
     <main>
         <div id="interestsDiv" class="interestsDiv">
@@ -284,12 +307,14 @@
                 <button class="feedBtn">⬇</button>    
             </div>
         </div>
-        <div id="post">
-            <input id="imageUpload" type="file" accept="image/*">
-            <img id="showImage" style="width: fit-content; height: fit-content;">
+        <div id="post" class="postMenu">
+            <h2 class="itemsOnPostMenu">Post Image</h2>
+            <input class="itemsOnPostMenu" id="imageUpload" type="file" accept="image/*">
+            <img class="itemsOnPostMenu" id="showImage" style="width: fit-content; height: fit-content;">
+            <textarea class="itemsOnPostMenu" placeholder="Enter post text here..." id="textForPostInp"></textarea>
         </div>
         <div id="feedBar" class="feedBar">
-            <button id="createVideo" class="feedBarBtn">➕</button>
+            <button id="createVideo" onclick="createPost()" class="feedBarBtn">➕</button>
         </div>
         <div id="userAcc" class="userAcc">
             <img class="pfpOnAcc" src="pfp.png">
@@ -359,6 +384,7 @@
         const programBtn = document.getElementById("programBtn");
         const nothingBtn = document.getElementById("nothingBtn");
         const feedBar = document.getElementById("feedBar");
+        const postMenu = document.getElementById("post");
         let artist = "0";
         let program = "0";
         let nothing = "0";
@@ -418,6 +444,13 @@
             feedBar.style.display = "none"
             userAcc.style.display = "grid";
             feedBar.style.display = "grid";
+        }
+
+        window.createPost = function() {
+            feed.style.display = "none";
+            feedBar.style.display = "none";
+            userAcc.style.display = "none";
+            postMenu.style.display = "grid";
         }
         
         window.loginSubmit = async function() {
