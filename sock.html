@@ -317,7 +317,7 @@
             <textarea class="itemsOnPostMenu" placeholder="Enter post text here..." id="textForPostInp"></textarea>
             <br>
             <br>
-            <button class="itemsOnPostMenu">Post!</button>
+            <button onclick="postImage()" class="itemsOnPostMenu">Post!</button>
         </div>
         <div id="feedBar" class="feedBar">
             <button id="createVideo" onclick="createPost()" class="feedBarBtn">➕</button>
@@ -479,6 +479,11 @@
             postMenu.style.display = "grid";
         }
         
+        window.postImage = function() {
+            feed.style.display = "flex";
+            feedBar.style.display = "grid";
+        }
+
         window.loginSubmit = async function() {
             const loginUser = document.getElementById("userInputLogin").value;
             const loginPassword = document.getElementById("passwordInputLogin").value;
