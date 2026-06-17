@@ -519,6 +519,7 @@
             feedBar.style.display = "none"
             feedBar.style.display = "grid";
             userAcc.style.display = "grid";
+            usernameOnAcc.innerText = "@" + username;
         }
 
         window.createPost = function() {
@@ -734,9 +735,10 @@
                 }
 
                 if (!data.username) {
-                    defaultSave.username = "username01";
+                    defaultSave.username = username;
                 } else {
                     defaultSave.username = data.username;
+                    username = data.username;
                 }
 
                 await setDoc(saveRef, defaultSave)
