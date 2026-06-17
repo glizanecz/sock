@@ -254,7 +254,7 @@
         display: none; /* change to flex */
         flex-direction: column;
         justify-content: center;
-        gap: 15px;
+        padding: 10px;
       }
     </style>
     <main>
@@ -590,7 +590,8 @@
                 saveRef = doc(db, "users", currentUserId);
                 loginBox.style.display = "none";
                 signUpBox.style.display = "none";
-                feed.style.display = "flex";;
+                feed.style.display = "flex";
+                userPostText.style.display = "flex";
                 feedBar.style.display = "grid";
             } catch (error) {
                 console.log("User does not exist.")
