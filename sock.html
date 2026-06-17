@@ -334,6 +334,7 @@
         </div>
         <div id="feedBar" class="feedBar">
             <button id="createVideo" onclick="createPost()" class="feedBarBtn">➕</button>
+            <button id="goToFeed" onclick="goToFeed()" class="feedBarBtn">🏠</button>
         </div>
         <div id="userAcc" class="userAcc">
             <img class="pfpOnAcc" src="pfp.png">
@@ -406,6 +407,9 @@
         const feedBar = document.getElementById("feedBar");
         const postMenu = document.getElementById("post");
         const userPostText = document.getElementById("userPostText");
+        const createVideo = document.getElementById("createVideo");
+        const goToFeed = document.getElementById("goToFeed");
+
         //i had ai make random adjectives and nouns
         const randomAdjective = [
             "Swift", "Silent", "Electric", "Cosmic", "Golden", "Crimson", "Frosty", "Lunar", "Solar", "Mystic",
@@ -542,12 +546,18 @@
             postMenu.style.display = "grid";
         }
         
-        window.postImage = async function() {
+        createVideo.onclick = async function() {
             await postImageFunc()
             postMenu.style.display = "none";
             feed.style.display = "flex";
             userPostText.style.display = "flex";
             feedBar.style.display = "grid";
+        }
+
+        goToFeed.onclick = function() {
+            feed.style.display = "flex";
+            userPostText.style.display = "flex";
+            feedBar.style.display = "grid";    
         }
 
         async function postImageFunc() {
