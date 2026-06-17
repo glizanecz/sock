@@ -338,7 +338,7 @@
         <div id="userAcc" class="userAcc">
             <img class="pfpOnAcc" src="pfp.png">
             <h2 class="usernameOnAcc" id="usernameOnAcc">@usernameHere</h1>
-            <h2> ----------------------------------</h2>
+            <h2>----------------------------------</h2>
             <img class="postsOnProfile" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg">
         </div>
     </main>
@@ -398,6 +398,7 @@
         window.currentUserId = null;
         //interests below
         let saveRef = null;
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
         const interestsDiv = document.getElementById("interestsDiv");
         const artistBtn = document.getElementById("artistBtn");
         const programBtn = document.getElementById("programBtn");
@@ -523,12 +524,13 @@
             feedBar.style.display = "grid";
         }
 
-        window.accBtnClick = function() {
+        window.accBtnClick = async function() {
             feed.style.display = "none";
             userPostText.style.display = "none";
             feedBar.style.display = "none"
-            feedBar.style.display = "grid";
             userAcc.style.display = "grid";
+            await sleep(10)
+            feedBar.style.display = "grid";
             usernameOnAcc.innerText = "@" + username;
         }
 
