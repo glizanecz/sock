@@ -303,20 +303,20 @@
             </form>
         </div>
         <div id="feedDiv" class="feed">
-            <img id="postShared" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
+            <img id="postShared" src="https://images.unsplash.com/photo-1772289093510-2c64b03d7fd5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D" alt="pic1"> 
             <div id="userPostText" class="userPostText">
-                <h4 id="usernameOnPost">@username01</h4>
+                <h4 id="usernameOnPost">@username0</h4>
                 <h4>--</h4>
-                <h4 id="currentPostText">Haha! Funny Eagle!</h4>
+                <h4 id="currentPostText">Post text here...</h4>
             </div>
             <div class="feedBtns">
-                <button class="feedBtn">↑</button>
+                <button onclick="scrollUp()" class="feedBtn">↑</button>
                 <button class="feedBtn" onclick="accBtnClick()"><img class="smallIMG" src="pfp.png"></button>
                 <button class="feedBtn">❤️</button>
                 <button class="feedBtn">⭐</button>
                 <button class="feedBtn">🔄</button>
                 <button class="feedBtn">📤</button>   
-                <button class="feedBtn">⬇</button>    
+                <button onclick="scrollDown()" class="feedBtn">⬇</button>    
             </div>
             <br>
         </div>
@@ -409,6 +409,10 @@
         const userPostText = document.getElementById("userPostText");
         const createVideo = document.getElementById("createVideo");
         const goToFeed = document.getElementById("goToFeed");
+        //feed videos below are test data, not real.
+        let feedVideos = [{id:"post1", title: "baldEagle"}, {id: "post2", title: "strawberry"}, {id: "post3", title: "bald man"}, {id: "post4", title: "cup o joe"}, {id: "post5", title: "game"}];
+        let currentVideoData = [];
+        let postUserIsOn = 3;
 
         //i had ai make random adjectives and nouns
         const randomAdjective = [
@@ -509,6 +513,23 @@
             tempImg.src = tempUrl;
         };
 
+        window.scrollUp = function() {
+            postUserIsOn -= 1;
+            if (feedVideos[(postUserIsOn - 2)] !== undefined) {
+                currentVideoData = feedVideos[postUserIsOn - 2].data();
+            } else {
+                console.log("User scrolled too far up!")
+            }
+        }
+
+        window.scrollDown = function() {
+            postUserIsOn += 1;
+            if (feedVideos[postUserIsOn - 1] !== undefined) {
+                currentVideoData = feedVideos[postUserIsOn - 1].data();
+            } else {
+                console.log("User scrolled down too far!")
+            }
+        }
 
         window.signUpInstead = function() {
             loginBox.style.display = "none";
