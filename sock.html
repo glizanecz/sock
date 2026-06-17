@@ -249,6 +249,13 @@
         border: black solid;  
         overflow: auto;
       }
+
+      .userPostText {
+        display: none; /* change to flex */
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+      }
     </style>
     <main>
         <div id="interestsDiv" class="interestsDiv">
@@ -297,11 +304,13 @@
         </div>
         <div id="feedDiv" class="feed">
             <img id="postShared" src="https://static.vecteezy.com/system/resources/thumbnails/041/166/062/small/ai-generated-hawk-high-quality-image-free-photo.jpg" alt="pic1"> 
-            <h4 id="usernameOnPost">@username01</h4>
-            <br>
-            <h4>--</h4>
-            <br>
-            <h4 id="currentPostText">Haha! Funny Eagle!</h4>
+            <div id="userPostText" class="userPostText">
+                <h4 id="usernameOnPost">@username01</h4>
+                <br>
+                <h4>--</h4>
+                <br>
+                <h4 id="currentPostText">Haha! Funny Eagle!</h4>
+            </div>
             <div class="feedBtns">
                 <button class="feedBtn">↑</button>
                 <button class="feedBtn" onclick="accBtnClick()"><img class="smallIMG" src="pfp.png"></button>
@@ -397,6 +406,7 @@
         const nothingBtn = document.getElementById("nothingBtn");
         const feedBar = document.getElementById("feedBar");
         const postMenu = document.getElementById("post");
+        const userPostText = document.getElementById("userPostText");
         //i had ai make random adjectives and nouns
         const randomAdjective = [
             "Swift", "Silent", "Electric", "Cosmic", "Golden", "Crimson", "Frosty", "Lunar", "Solar", "Mystic",
@@ -511,11 +521,13 @@
             creatingFeed()
             interestsDiv.style.display = "none";
             feed.style.display = "flex";
+            userPostText.style.display = "flex";
             feedBar.style.display = "grid";
         }
 
         window.accBtnClick = function() {
             feed.style.display = "none";
+            userPostText.style.display = "none";
             feedBar.style.display = "none"
             feedBar.style.display = "grid";
             userAcc.style.display = "grid";
@@ -524,6 +536,7 @@
 
         window.createPost = function() {
             feed.style.display = "none";
+            userPostText.style.display = "none";
             feedBar.style.display = "none";
             userAcc.style.display = "none";
             postMenu.style.display = "grid";
@@ -533,6 +546,7 @@
             await postImageFunc()
             postMenu.style.display = "none";
             feed.style.display = "flex";
+            userPostText.style.display = "flex";
             feedBar.style.display = "grid";
         }
 
